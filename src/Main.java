@@ -16,21 +16,17 @@ public class Main {
     /**
      * @param name
      */
-    public void add(final String entry) {
-        boolean isDuplicate = false;
+    public void add(final String entry) {        
         if (search(entry) != -1) {
-            isDuplicate = true;
-        }
-        String[] temp = new String[database.length + 1];
-        temp[database.length] = entry;
-        if (isDuplicate == false) {
-            for (int i = 0; i < database.length; i++) {
-                {
-                    temp[i] = database[i];
-                }
-            }
-        }
-        database = temp;
+            String[] temp = new String[database.length + 1];
+            temp[database.length] = entry;             
+                for (int i = 0; i < database.length; i++) {
+                    {
+                        temp[i] = database[i];
+                    }
+                }            
+            database = temp;
+        }       
     }
 
     /**
