@@ -16,17 +16,15 @@ public class Main {
     /**
      * @param name
      */
-    public void add(final String entry) {        
+    public void add(final String entry) {
         if (search(entry) != -1) {
             String[] temp = new String[database.length + 1];
-            temp[database.length] = entry;             
-                for (int i = 0; i < database.length; i++) {
-                    {
-                        temp[i] = database[i];
-                    }
-                }            
+            temp[database.length] = entry;
+            for (int i = 0; i < database.length; i++) {
+                temp[i] = database[i];
+            }
             database = temp;
-        }       
+        }
     }
 
     /**
