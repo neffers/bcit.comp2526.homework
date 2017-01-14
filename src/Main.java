@@ -18,32 +18,18 @@ public class Main {
     /**
      * @param name
      */
-    public void add(final String name) {
-        if (name != null) {
-            if ((searchCaseInSensitive(name) == -1)) {
+    public void add(final String entry) {
+        if (entry != null) {
                 String[] temp = new String[database.length + 1];
-                temp[database.length] = name;
+                temp[database.length] = entry;
                 for (int i = 0; i < database.length; i++) {
+                    if(!(database[i].contains(entry))){
                     temp[i] = database[i];
-                }
+                }}
                 database = temp;
-            } else {
-                System.out.println("this entry has already been added");
             }
-        }
-    }
-
-    public int searchCaseInSensitive(final String name) {
-        int returnType = -1;
-        if (name != null) {
-            for (int i = 0; i < database.length; i++) {
-                if (database[i].toLowerCase().contains(name.toLowerCase())) {
-                    returnType = i;
-                }
             }
-        }
-        return returnType;
-    }
+        
 
     /**
      * @param name
@@ -53,7 +39,7 @@ public class Main {
         int returnType = -1;
         if (name != null) {
             for (int i = 0; i < database.length; i++) {
-                if (database[i].contains(name)) {
+                if (database[i].toLowerCase().contains(name.toLowerCase())) {
                     returnType = i;
                 }
             }
@@ -117,6 +103,19 @@ public class Main {
         return choice;
     }
 
+    public boolean checkPersonAdded(String entryName, String entryNumber) {
+        boolean trueOrFalse = false;
+        for (int i = 0; i < database.length; i++) {
+            for (int j = 0; j < database.length; j++) {
+                if (database[i].toLowerCase().contains(entryName.toLowerCase()) 
+                        || database[j].toLowerCase().contains(entryNumber.toLowerCase())) {
+                    trueOrFalse = true;
+                }
+            }
+        }
+        return trueOrFalse;
+    }
+
     /**
      * 
      */
@@ -132,7 +131,12 @@ public class Main {
             System.out.println("");
         } catch (Exception e) {
         }
+        if(checkPersonAdded(name, phone) == false){
         add(name + " " + phone);
+        }
+        else{
+            System.out.println("This entry is already added.");
+        }
     }
 
     /**
