@@ -1,21 +1,16 @@
+//imports
 import java.util.Scanner;
 
-/**
- * @author Rob
- *
- */
 public class Main {
     protected String[] database;
     private Scanner input;
 
     public Main() {
-        database = new String[0];
+        database = new String[];
         input = new Scanner(System.in);
     }
 
-    /**
-     * @param name
-     */
+    //add function, should check for duplicate entry, adding the new entry to the array if it is not a duplicate
     public void add(final String entry) {
         if (search(entry) != -1) {
             String[] temp = new String[database.length + 1];
@@ -26,11 +21,7 @@ public class Main {
             database = temp;
         }
     }
-
-    /**
-     * @param name
-     * @return returnType
-     */
+    //search function, should search for the entered string as a name
     public int search(final String name) {
         if (name != null) {
             for (int i = 0; i < database.length; i++) {
@@ -42,9 +33,7 @@ public class Main {
         return -1;
     }
 
-    /**
-     * 
-     */
+    //displayall, should display all entries
     public void displayAll() {
 
         for (int i = 0; i < database.length; i++) {
@@ -53,10 +42,7 @@ public class Main {
         }
     }
 
-    /**
-     * @param name
-     * @return
-     */
+    //remove, should function without any editing
     public boolean remove(final String name) {
         int pos = search(name);
         if (pos >= 0) {
@@ -69,9 +55,7 @@ public class Main {
         return false;
     }
 
-    /**
-     * 
-     */
+    //UI function, should not need editing
     public void displayMenu() {
         System.out.println("\n\n\n1) Add");
         System.out.println("2) Delete");
@@ -79,7 +63,8 @@ public class Main {
         System.out.println("4) Display All");
         System.out.println("5) Exit\n");
     }
-
+    
+    //get user choice and return it
     public int getChoice() {
         int choice = 4;// default
         boolean done = false;
@@ -98,6 +83,8 @@ public class Main {
         return choice;
     }
 
+    //checks if the given entry is already in the array, search should fulfill this function, duplicate?
+    /*
     public boolean checkPersonAdded(String entryName, String entryNumber) {
         boolean trueOrFalse = false;
         for (int i = 0; i < database.length; i++) {
@@ -109,11 +96,10 @@ public class Main {
             }
         }
         return trueOrFalse;
-    }
+    } 
+    */
 
-    /**
-     * 
-     */
+    //UI for add() function
     public void addPerson() {
         String name = "";
         String phone = "";
@@ -133,9 +119,7 @@ public class Main {
         }
     }
 
-    /**
-     * 
-     */
+    //ui for remove() function
     public void deletePerson() {
         String name = "";
         try {
@@ -151,9 +135,7 @@ public class Main {
         }
     }
 
-    /**
-     * 
-     */
+    //ui for search() function
     public void findPerson() {
         String name = "";
         try {
@@ -175,9 +157,7 @@ public class Main {
         }
     }
 
-    /**
-     * 
-     */
+    //main execution of ui
     public void run() {
         int choice = 0;
         do {
@@ -205,7 +185,3 @@ public class Main {
         new Main().run();
     }
 }
-
-// 8:44 PM - hush: entry i of database array is a 2 entry array of strings,
-// database[i][0] being the name, database[i][1] being the phone number
-// 8:47 PM - hush: database[i]=name+"\t"+number
