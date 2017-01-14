@@ -25,6 +25,11 @@ public class Main {
             database = temp;
         }
     }
+    
+    //overload for add function, when it only calls a name
+    public void add(final String name) {
+         add(name,"");
+    }
     //search function, should search for the entered string as a name
     public int search(final String name) {
 	System.out.println("starting search function");
