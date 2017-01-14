@@ -31,11 +31,13 @@ public class Main {
          add(name,"");
     }
     //search function, should search for the entered string as a name
-    public int search(final String name) {
+    public int search(final String searchName) {
 	System.out.println("starting search function");
-        if (name != null) {
+        if (searchName != null) {
             for (int i = 0; i < database.length; i++) {
-                if (database[i][0].toLowerCase() == name.toLowerCase()) {
+		System.out.println("Checking database entry "+i+", data: "+database[i][0]);
+		System.out.println(database[i][0].toLowerCase() +" "+ searchName.toLowerCase());
+                if (database[i][0].equalsIgnoreCase(searchName)) {
 		    System.out.println("search returned true at position "+i);
                     return i;
                 }
@@ -146,7 +148,6 @@ public class Main {
         try {
             System.out.print("Enter the persons name ");
             name = input.next();
-            System.out.println("");
         } catch (Exception e) {
         }
         int pos = search(name);
