@@ -35,7 +35,7 @@ public class Main {
 	System.out.println("starting search function");
         if (name != null) {
             for (int i = 0; i < database.length; i++) {
-                if (database[i][0].toLowerCase().contains(name.toLowerCase())) {
+                if (database[i][0].toLowerCase() == name.toLowerCase()) {
 		    System.out.println("search returned true at position "+i);
                     return i;
                 }
