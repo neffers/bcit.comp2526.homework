@@ -17,16 +17,16 @@ public class Main {
      * @param name
      */
     public void add(final String entry) {
-        boolean isNotDuplicate = false;
+        boolean isDuplicate = false;
         if (entry != null) {
             String[] temp = new String[database.length + 1];
             temp[database.length] = entry;
             for (int l = 0; l < database.length; l++) {
                 if (database[l].contains(entry)) {
-                    isNotDuplicate = true;
+                    isDuplicate = true;
                 }
             }
-            if (isNotDuplicate == false) {
+            if (isDuplicate == false) {
                 for (int i = 0; i < database.length; i++) {
                     {
                         temp[i] = database[i];
