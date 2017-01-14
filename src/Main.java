@@ -18,23 +18,19 @@ public class Main {
      */
     public void add(final String entry) {
         boolean isDuplicate = false;
-        if (entry != null) {
-            String[] temp = new String[database.length + 1];
-            temp[database.length] = entry;
-            for (int l = 0; l < database.length; l++) {
-                if (database[l].contains(entry)) {
-                    isDuplicate = true;
+        if (search(entry) != -1) {
+            isDuplicate = true;
+        }
+        String[] temp = new String[database.length + 1];
+        temp[database.length] = entry;
+        if (isDuplicate == false) {
+            for (int i = 0; i < database.length; i++) {
+                {
+                    temp[i] = database[i];
                 }
             }
-            if (isDuplicate == false) {
-                for (int i = 0; i < database.length; i++) {
-                    {
-                        temp[i] = database[i];
-                    }
-                }                
-            }
-            database = temp;
         }
+        database = temp;
     }
 
     /**
