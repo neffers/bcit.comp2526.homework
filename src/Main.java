@@ -22,11 +22,11 @@ public class Main {
             String[] temp = new String[database.length + 1];
             temp[database.length] = entry;
             for (int l = 0; l < database.length; l++) {
-                if (!(database[l].contains(entry))) {
+                if (database[l].contains(entry)) {
                     isNotDuplicate = true;
                 }
             }
-            if (isNotDuplicate == true) {
+            if (isNotDuplicate == false) {
                 for (int i = 0; i < database.length; i++) {
                     {
                         temp[i] = database[i];
