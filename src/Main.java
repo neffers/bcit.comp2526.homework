@@ -1,5 +1,3 @@
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -19,32 +17,39 @@ public class Main {
      * @param name
      */
     public void add(final String entry) {
+        boolean isNotDuplicate = false;
         if (entry != null) {
-                String[] temp = new String[database.length + 1];
-                temp[database.length] = entry;
+            String[] temp = new String[database.length + 1];
+            temp[database.length] = entry;
+            for (int l = 0; l < database.length; l++) {
+                if (!(database[l].contains(entry))) {
+                    isNotDuplicate = true;
+                }
+            }
+            if (isNotDuplicate == true) {
                 for (int i = 0; i < database.length; i++) {
-                    if(!(database[i].contains(entry))){
-                    temp[i] = database[i];
-                }}
-                database = temp;
+                    {
+                        temp[i] = database[i];
+                    }
+                }                
             }
-            }
-        
+            database = temp;
+        }
+    }
 
     /**
      * @param name
      * @return returnType
      */
     public int search(final String name) {
-        int returnType = -1;
         if (name != null) {
             for (int i = 0; i < database.length; i++) {
                 if (database[i].toLowerCase().contains(name.toLowerCase())) {
-                    returnType = i;
+                    return i;
                 }
             }
         }
-        return returnType;
+        return -1;
     }
 
     /**
@@ -107,7 +112,7 @@ public class Main {
         boolean trueOrFalse = false;
         for (int i = 0; i < database.length; i++) {
             for (int j = 0; j < database.length; j++) {
-                if (database[i].toLowerCase().contains(entryName.toLowerCase()) 
+                if (database[i].toLowerCase().contains(entryName.toLowerCase())
                         || database[j].toLowerCase().contains(entryNumber.toLowerCase())) {
                     trueOrFalse = true;
                 }
@@ -131,10 +136,9 @@ public class Main {
             System.out.println("");
         } catch (Exception e) {
         }
-        if(checkPersonAdded(name, phone) == false){
-        add(name + " " + phone);
-        }
-        else{
+        if (checkPersonAdded(name, phone) == false) {
+            add(name + " " + phone);
+        } else {
             System.out.println("This entry is already added.");
         }
     }
