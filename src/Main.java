@@ -1,7 +1,17 @@
-
-//imports
 import java.util.Scanner;
 
+/**
+ * So, I know that the Java check list that you provided tells us to user magic numbers. 
+ * But I over heard my lab instructor saying that sometimes 0-2 are not considered magic numbers, 
+ * depending on how they are used.  So I feel that my database indexes are not that magically, 
+ * so don't require them to be a constant variable.
+ * Also, wasn't sure if you were wanting us to put in variables for getChoice(), as that is
+ * code that you wrote yourself, so I would have expected you to know when
+ * and when not to use variables for that.
+ * 
+ * @author Rob.
+ * @version 10.
+ */
 public class Main {
     protected String[][] database;
     private Scanner input;
@@ -11,15 +21,16 @@ public class Main {
         input = new Scanner(System.in);
     }
 
-    // add function, should check for duplicate entry, adding the new entry to
-    // the array if it is not a duplicate
+    /**
+     * Adds name into the database.
+     * 
+     * @param name Name is the input from the addPerson() method
+     * @param number Number is the input from the addPerson() method
+     */
     public void add(final String name, final String number) {
-        System.out.println("starting add function");
         if (search(name) == -1) {
-            System.out.println("creating new array");
             String[][] temp = new String[database.length + 1][2];
             for (int i = 0; i < database.length; i++) {
-                System.out.println("copied entry at position " + i + " to new array");
                 temp[i] = database[i];
             }
             temp[database.length][0] = name;
@@ -28,37 +39,51 @@ public class Main {
         }
     }
 
-    // overload for add function, when it only calls a name
+    /**
+     * Allows junit to be happy.
+     * 
+     * @param name Overload 
+     */
     public void add(final String name) {
         add(name, "");
     }
 
-    // search function, should search for the entered string as a name
+    /**
+     * Checks position of name in database.
+     * 
+     * @param searchName The inputed name is used from the add(), remove(), and find person()
+     * @return the return is either i for index or returns -1 if it's not found.
+     */
     public int search(final String searchName) {
-        System.out.println("starting search function");
         if (searchName != null) {
             for (int i = 0; i < database.length; i++) {
-                System.out.println("Checking database entry "+i+", data: "+database[i][0]);
-                System.out.println(database[i][0].toLowerCase() +" "+ searchName.toLowerCase());
                 if (database[i][0].equalsIgnoreCase(searchName)) {
-                    System.out.println("search returned true at position " + i);
                     return i;
                 }
             }
         }
-        System.out.println("search returned null!");
         return -1;
     }
 
-    // displayall, should display all entries
+    /** Prints out database.
+     * 
+     */
     public void displayAll() {
-        System.out.println("#\tName\tPhone Number");
+        //This piece of code is for testing reasons
+        //System.out.println("#\tName\tPhone Number");
         for (int i = 0; i < database.length; i++) {
-            System.out.println(i + "\t" + database[i][0] + "\t" + database[i][1]);
+            //This piece of code is for testing reasons
+            //System.out.println(i + "\t" + database[i][0] + "\t" + database[i][1]);
+            System.out.printf("%-20s %-15s\n", database[i][0], database[i][1]);
         }
     }
 
-    // remove, should function without any editing
+    /**
+     * Removes name from database.
+     * 
+     * @param name the input that is given.
+     * @return returns true or false
+     */
     public boolean remove(final String name) {
         int pos = search(name);
         if (pos >= 0) {
@@ -71,7 +96,9 @@ public class Main {
         return false;
     }
 
-    // UI function, should not need editing
+    /**
+     * Displays the menu.
+     */
     public void displayMenu() {
         System.out.println("1) Add");
         System.out.println("2) Delete");
@@ -80,9 +107,14 @@ public class Main {
         System.out.println("5) Exit");
     }
 
-    // get user choice and return it
+
+    /**
+     * returns choice of user.
+     * 
+     * @return returns the choice which the User has chosen.
+     */
     public int getChoice() {
-        int choice = 4;// default
+        int choice = 4;
         boolean done = false;
         while (!done) {
             System.out.print("choice? ");
@@ -99,21 +131,29 @@ public class Main {
         return choice;
     }
 
-    // used in addperson to check if the entry already exists
-    public boolean checkPersonAdded(String entryName, String entryNumber) {
+    /**
+     * Checks if information is already added.
+     * 
+     * @param entryName The name that is passed through when calling this method
+     * @param entryNumber The phone number, called entryNumber that is passed through 
+     * @return returns either true of false.
+     */
+    public boolean checkPersonAdded(final String entryName, final String entryNumber) {
         for (int i = 0; i < database.length; i++) {
-            if (database[i][0].toLowerCase().contains(entryName.toLowerCase()) || database[i][1] == entryNumber) {
+            if (database[i][0].equalsIgnoreCase(entryName)
+                    || database[i][1].equalsIgnoreCase(entryNumber)) {
                 return true;
             }
         }
         return false;
     }
 
-    // UI for add() function
+    /**
+     * Allows inputs from user for adding an entry.
+     */
     public void addPerson() {
         String name = "";
         String phone = "";
-        boolean done = false;
         try {
             System.out.print("Enter the persons name ");
             name = input.next();
@@ -129,7 +169,9 @@ public class Main {
         }
     }
 
-    // ui for remove() function
+    /**
+     *  Deletes entry from database.
+     */
     public void deletePerson() {
         String name = "";
         try {
@@ -145,7 +187,9 @@ public class Main {
         }
     }
 
-    // ui for search() function
+    /**
+     * Finds a person through the given String.
+     */
     public void findPerson() {
         String name = "";
         try {
@@ -161,7 +205,9 @@ public class Main {
         }
     }
 
-    // main execution of ui
+    /**
+     * Basic menu for the program.
+     */
     public void run() {
         int choice = 0;
         do {
@@ -180,11 +226,14 @@ public class Main {
             case 4:
                 displayAll();
             default:
-                // should not get here
             }
-        } while (choice != 5);
+        }
+        while (choice != 5);
     }
 
+    /**
+     * @param args main method.
+     */
     public static void main(String[] args) {
         new Main().run();
     }
